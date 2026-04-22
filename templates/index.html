@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Image Scraper Project</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="page-shell">
+    <div class="hero-card">
+        <p class="eyebrow">Flask + BeautifulSoup + Requests</p>
+        <h1>Image Scraper Project</h1>
+        <p class="hero-copy">
+            Enter a keyword, fetch image search results, download the images,
+            and preview the output in a simple web app.
+        </p>
+
+        {% if error %}
+        <div class="error-banner">{{ error }}</div>
+        {% endif %}
+
+        <form action="/review" method="POST" class="search-form">
+            <input
+                type="text"
+                name="content"
+                id="content"
+                placeholder="Try: iphone, nature, laptop"
+                autocomplete="off"
+            >
+            <input type="submit" value="Scrape Images">
+        </form>
+    </div>
+</div>
+{% endblock %}
