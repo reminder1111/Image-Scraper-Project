@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Scraped Images</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="page-shell">
+    <div class="result-header-card">
+        <p class="eyebrow">Scrape Result</p>
+        <h1>Images for "{{ query }}"</h1>
+        <p class="hero-copy">
+            Downloaded {{ images|length }} image{{ '' if images|length == 1 else 's' }}
+            into the local project folder.
+        </p>
+
+        {% if saved_to_db %}
+        <p class="status-chip success">Metadata was also saved to MongoDB.</p>
+        {% else %}
+        <p class="status-chip muted">MongoDB save skipped because no connection string was provided.</p>
+        {% endif %}
+
+        <a class="back-link" href="{{ url_for('homepage') }}">Search again</a>
+    </div>
+
+    <div class="gallery-grid">
+        {% for image in images %}
+        <div class="gallery-card">
+            <img
+                src="{{ url_for('static', filename=image['relative_path']) }}"
+                alt="Scraped result {{ image['index'] + 1 }}"
+                class="gallery-image"
+            >
+            <div class="gallery-meta">
+                <p><strong>Image {{ image['index'] + 1 }}</strong></p>
+                <p class="filename">{{ image['filename'] }}</p>
+                <a href="{{ image['source_url'] }}" target="_blank" rel="noreferrer">Open source</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
