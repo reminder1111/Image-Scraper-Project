@@ -1,0 +1,12 @@
+.hero-card,
+.result-header-card,
+.gallery-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-card:hover,
+.result-header-card:hover,
+.gallery-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(18, 52, 86, 0.1);
+}
